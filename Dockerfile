@@ -14,6 +14,6 @@ ENV POSTGRES_PASSWORD="postgres"
 ENV POSTGRES_HOST="localhost"
 ENV POSTGRES_PORT="5432"
 ENV POSTGRES_DB="dellstore"
-RUN ["chmod", "+x", "/opt/notsendgrid/bin/notsendgrid_exec.sh"]
+RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 EXPOSE 5000
 CMD ./bin/notsendgrid_exec.sh

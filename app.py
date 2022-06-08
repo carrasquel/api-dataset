@@ -5,11 +5,13 @@ from flask_autocrud import AutoCrud
 from flask_sqlalchemy import SQLAlchemy
 
 POSTGRES_USER = os.getenv("POSTGRES_USER")
-SMTP_PORT = os.getenv("SMTP_PORT")
-SENDGRID_MOCK_HOST = os.getenv("SENDGRID_MOCK_HOST")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT")
+POSTGRES_DB = os.getenv("POSTGRES_DB")
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/dellstore'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_HOST}/{POSTGRES_DB}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['AUTOCRUD_METADATA_ENABLED'] = True
 
