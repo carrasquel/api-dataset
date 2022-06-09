@@ -13,7 +13,7 @@ WORKDIR /tmp/psql_data
 
 RUN wget -c https://ftp.postgresql.org/pub/projects/pgFoundry/dbsamples/dellstore2/dellstore2-normal-1.0/dellstore2-normal-1.0.tar.gz -O - | tar -xz
 
-FROM postgres:alpine as dumper
+FROM postgres:alpine
 
 COPY --from=dumper /tmp/psql_data/dellstore2-normal-1.0/dellstore2-normal-1.0.sql /docker-entrypoint-initdb.d/
 
