@@ -1,4 +1,4 @@
-FROM postgres
+FROM postgres:alpine
 
 MAINTAINER Nelson Carrasquel <carrasquel@outlook.com>
 
