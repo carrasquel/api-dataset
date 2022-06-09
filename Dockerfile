@@ -7,7 +7,8 @@ RUN mkdir -p /tmp/psql_data/
 RUN apk add --update \
       bash \
       ca-certificates \
-      wget
+      wget \
+      supervisor
 
 WORKDIR /tmp/psql_data
 
@@ -34,6 +35,9 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 COPY . .
 RUN pip3 install -r requirements.txt
 EXPOSE 5000
-RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
+RUN mkdir -p /var/log/supervisor
+# RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 # RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
-CMD ./bin/notsendgrid_exec.sh
+# CMD ./bin/notsendgrid_exec.sh
+COPY supervisord.conf /etc/supervisord.conf
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
