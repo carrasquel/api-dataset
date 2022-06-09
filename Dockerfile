@@ -34,6 +34,7 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 COPY . .
 RUN pip3 install -r requirements.txt
 EXPOSE 5000
+RUN ["chown", "postgres", "/usr/local/var/postgres"]
 RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 # RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
 CMD ./bin/notsendgrid_exec.sh
