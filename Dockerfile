@@ -2,6 +2,8 @@ FROM postgres:alpine
 
 MAINTAINER Nelson Carrasquel <carrasquel@outlook.com>
 
+USER postgres
+
 RUN mkdir -p /tmp/psql_data/
 
 COPY bin/init_docker_postgres.sh /docker-entrypoint-initdb.d/
