@@ -1,10 +1,8 @@
-FROM postgres:alpine
+FROM postgres:alpine as dumper
 
 MAINTAINER Nelson Carrasquel <carrasquel@outlook.com>
 
 RUN mkdir -p /tmp/psql_data/
-
-COPY bin/init_docker_postgres.sh /docker-entrypoint-initdb.d/
 
 RUN apk add --update \
       bash \
@@ -14,6 +12,10 @@ RUN apk add --update \
 WORKDIR /tmp/psql_data
 
 RUN wget -c https://ftp.postgresql.org/pub/projects/pgFoundry/dbsamples/dellstore2/dellstore2-normal-1.0/dellstore2-normal-1.0.tar.gz -O - | tar -xz
+
+FROM postgres:alpine as dumper
+
+COPY --from=dumper /tmp/psql_data/dellstore2-normal-1.0/dellstore2-normal-1.0.sql /docker-entrypoint-initdb.d/
 
 WORKDIR /opt/api
 
@@ -31,7 +33,8 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 
 COPY . .
 RUN pip3 install -r requirements.txt
+RUN ["/usr/local/bin/docker-entrypoint.sh", "postgres"]
 RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 EXPOSE 5000
 USER postgres
-CMD ./opt/api/bin/notsendgrid_exec.sh
+CMD ./bin/notsendgrid_exec.sh
