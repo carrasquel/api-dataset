@@ -31,7 +31,6 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 
 COPY . .
 RUN pip3 install -r requirements.txt
-
 RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 EXPOSE 5000
 CMD ./bin/notsendgrid_exec.sh

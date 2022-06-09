@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 /opt/api/app.py && fg
+postgres & python3 /opt/api/app.py && fg
