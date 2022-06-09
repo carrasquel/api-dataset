@@ -2,8 +2,6 @@ FROM postgres:alpine
 
 MAINTAINER Nelson Carrasquel <carrasquel@outlook.com>
 
-USER postgres
-
 RUN mkdir -p /tmp/psql_data/
 
 COPY bin/init_docker_postgres.sh /docker-entrypoint-initdb.d/
@@ -35,4 +33,5 @@ COPY . .
 RUN pip3 install -r requirements.txt
 RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 EXPOSE 5000
+USER postgres
 CMD ./bin/notsendgrid_exec.sh
