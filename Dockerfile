@@ -34,4 +34,4 @@ RUN pip3 install -r requirements.txt
 RUN ["chmod", "+x", "/opt/api/bin/notsendgrid_exec.sh"]
 EXPOSE 5000
 USER postgres
-CMD ./bin/notsendgrid_exec.sh
+CMD ./opt/api/bin/notsendgrid_exec.sh
