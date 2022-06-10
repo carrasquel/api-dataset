@@ -35,6 +35,7 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 COPY . .
 RUN pip3 install -r requirements.txt
 EXPOSE 5000
+EXPOSE 5432
 RUN mkdir -p /var/log/supervisor
 
 COPY supervisord.conf /etc/supervisord.conf

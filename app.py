@@ -2,6 +2,7 @@ import os
 from flask import Flask
 
 from flask_autocrud import AutoCrud
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 POSTGRES_USER = os.getenv("POSTGRES_USER")
@@ -17,5 +18,6 @@ app.config['AUTOCRUD_METADATA_ENABLED'] = True
 
 db = SQLAlchemy(app)
 AutoCrud(app, db)
+CORS(app)
 
 app.run(host="0.0.0.0", debug=True)
