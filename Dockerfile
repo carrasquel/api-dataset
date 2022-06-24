@@ -13,7 +13,7 @@ RUN apk add --update \
 WORKDIR /tmp/psql_data
 
 RUN wget -c https://github.com/devrimgunduz/pagila/archive/refs/tags/v2.1.0.tar.gz -O - | tar -xz
-RUN cat /pagila-2.1.0/pagila-schema.sql /pagila-2.1.0/pagila-insert-data.sql > pagila-data.sql
+RUN cat /pagila-2.1.0/pagila-schema.sql /pagila-2.1.0/pagila-insert-data.sql > /pagila-2.1.0/pagila-data.sql
 
 FROM postgres:alpine
 
