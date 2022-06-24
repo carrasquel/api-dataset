@@ -13,11 +13,11 @@ RUN apk add --update \
 WORKDIR /tmp/psql_data
 
 RUN wget -c https://github.com/devrimgunduz/pagila/archive/refs/tags/v2.1.0.tar.gz -O - | tar -xz
+RUN cat pagila-schema.sql pagila-insert-data.sql > pagila-data.sql
 
 FROM postgres:alpine
 
-COPY --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-schema.sql /docker-entrypoint-initdb.d/01.sql
-COPY --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-insert-data.sql /docker-entrypoint-initdb.d/02.sql
+COPY --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-data.sql /docker-entrypoint-initdb.d/pagila-init.sql
 
 WORKDIR /opt/api
 
