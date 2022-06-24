@@ -4,13 +4,13 @@ Have you ever wanted to access pre-populated APIs with dummy but valid data? It 
 
 ## Tags
 
-Available tags are `dellstore`, `iso3166`,  `sportsdb`, `usda`, `world`, `all` and `latest`. `all` and `latest` are the same image with all the datasets in one image. Each of them has been loaded into their own database in the image. The rest of the tags belong to images single datasets.
+Available tags are `dellstore` and `pagila`. Each of them has been loaded into their own database in the image.
 
 ## Usage
 
 You can start the container by running:
 ```
-docker run -d --name pg-ds-<tag> carrasquel/api-dataset:<tag>
+docker run -d --name pg-ds-<tag> -p 5000:5000 -p 5432:5432 carrasquel/api-dataset:<tag>
 ```
 and access it by:
 ```
