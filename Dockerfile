@@ -16,8 +16,8 @@ RUN wget -c https://github.com/devrimgunduz/pagila/archive/refs/tags/v2.1.0.tar.
 
 FROM postgres:alpine
 
-ADD --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-schema.sql /docker-entrypoint-initdb.d/01.sql
-ADD --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-insert-data.sql /docker-entrypoint-initdb.d/02.sql
+COPY --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-schema.sql /docker-entrypoint-initdb.d/01.sql
+COPY --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-insert-data.sql /docker-entrypoint-initdb.d/02.sql
 
 WORKDIR /opt/api
 
