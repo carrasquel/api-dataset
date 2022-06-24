@@ -12,11 +12,12 @@ RUN apk add --update \
 
 WORKDIR /tmp/psql_data
 
-RUN wget -c https://ftp.postgresql.org/pub/projects/pgFoundry/dbsamples/dellstore2/dellstore2-normal-1.0/dellstore2-normal-1.0.tar.gz -O - | tar -xz
+RUN wget -c https://github.com/devrimgunduz/pagila/archive/refs/tags/v2.1.0.tar.gz -O - | tar -xz
 
 FROM postgres:alpine
 
-COPY --from=dumper /tmp/psql_data/dellstore2-normal-1.0/dellstore2-normal-1.0.sql /docker-entrypoint-initdb.d/
+ADD --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-schema.sql /docker-entrypoint-initdb.d/01.sql
+ADD --from=dumper /tmp/psql_data/pagila-2.1.0/pagila-insert-data.sql /docker-entrypoint-initdb.d/02.sql
 
 WORKDIR /opt/api
 
@@ -24,7 +25,7 @@ ENV POSTGRES_USER="postgres"
 ENV POSTGRES_PASSWORD="postgres"
 ENV POSTGRES_HOST="localhost"
 ENV POSTGRES_PORT="5432"
-ENV POSTGRES_DB="dellstore"
+ENV POSTGRES_DB="pagila"
 
 ENV PYTHONUNBUFFERED=1
 RUN apk add supervisor
